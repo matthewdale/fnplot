@@ -10,29 +10,23 @@ Plot the `math.Sin` function between 0 and 100 on the X axis.
 ```go
 import (
     "math"
-    "github.com/leanovate/gopter/gen"
     "github.com/matthewdale/fnplot"
 )
 
 func main() {
-    p := fnplot.FnPlot{
+    err := fnplot.FnPlot{
+        Fn: fnplot.NewFn(
+            math.Sin,
+            fnplot.Float64Range(0, 100),
+        ),
         Filename: "sin.png",
         Title:    "math.Sin",
-        Fn: fnplot.NewFn(
-            func(set *fnplot.ValuesSet) interface{} {
-                return func(x float64) bool {
-                    y := math.Sin(x)
-                    set.Insert(fnplot.Values{x}, fnplot.Values{y})
-                    return true
-                }
-            },
-            gen.Float64Range(0, 100),
-        ),
-        Samples: 2000,
-        X:       &fnplot.StdAxix{},
-        Y:       &fnplot.StdAxix{},
-    }
-    if err := p.Save(); err != nil {
+        Samples:  2000,
+        X:        &fnplot.StdAxix{},
+        Y:        &fnplot.StdAxix{},
+    }.Save()
+
+    if err != nil {
         panic(err)
     }
 }
@@ -44,28 +38,24 @@ Plot the `md5.Sum` function using a natural log X axis and scaled Y axis.
 ```go
 import (
     "crypto/md5"
-    "github.com/leanovate/gopter/gen"
     "github.com/matthewdale/fnplot"
 )
 
 func main() {
-    p := fnplot.FnPlot{
+    err := fnplot.FnPlot{
+        Fn: fnplot.NewFn(
+            func(s string) [md5.Size]byte {
+                return md5.Sum([]byte(s))
+            },
+            fnplot.AnyString()),
         Filename: "md5.png",
         Title:    "md5.Sum",
-        Fn: fnplot.NewFn(
-            func(set *fnplot.ValuesSet) interface{} {
-                return func(s string) bool {
-                    sum := md5.Sum([]byte(s))
-                    set.Insert(fnplot.Values{s}, fnplot.Values{sum})
-                    return true
-                }
-            },
-            gen.AnyString()),
-        Samples: 2000,
-        X:       &fnplot.LnAxis{},
-        Y:       &fnplot.ScaledAxis{Max: 1000},
-    }
-    if err := p.Save(); err != nil {
+        Samples:  2000,
+        X:        &fnplot.LnAxis{},
+        Y:        &fnplot.ScaledAxis{Max: 1000},
+    }.Save()
+
+    if err != nil {
         panic(err)
     }
 }

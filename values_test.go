@@ -22,52 +22,52 @@ func TestScalar(t *testing.T) {
 		},
 		{
 			description: "int value",
-			values:      Values{123},
+			values:      NewValues(123),
 			expected:    big.NewFloat(123),
 		},
 		{
 			description: "float value",
-			values:      Values{123.456},
+			values:      NewValues(123.456),
 			expected:    big.NewFloat(123.456),
 		},
 		{
 			description: "byte value",
-			values:      Values{byte('d')},
+			values:      NewValues(byte('d')),
 			expected:    big.NewFloat(100),
 		},
 		{
 			description: "byte slice value",
-			values:      Values{[]byte("test")},
+			values:      NewValues([]byte("test")),
 			expected:    big.NewFloat(1952805748),
 		},
 		{
 			description: "rune value",
-			values:      Values{'æ'},
+			values:      NewValues('æ'),
 			expected:    big.NewFloat(50086),
 		},
 		{
 			description: "string value",
-			values:      Values{"test"},
+			values:      NewValues("test"),
 			expected:    big.NewFloat(1952805748),
 		},
 		{
 			description: "Nil values should be ignored",
-			values:      Values{nil, "test", nil},
+			values:      NewValues(nil, "test", nil),
 			expected:    big.NewFloat(1952805748),
 		},
 		{
 			description: "Large int value",
-			values:      Values{math.MaxInt32 + 1},
+			values:      NewValues(math.MaxInt32 + 1),
 			expected:    big.NewFloat(float64(math.MaxInt32 + 1)),
 		},
 		{
 			description: "Large uint value",
-			values:      Values{math.MaxUint32 + 1},
+			values:      NewValues(math.MaxUint32 + 1),
 			expected:    big.NewFloat(float64(math.MaxUint32 + 1)),
 		},
 		{
 			description: "map value",
-			values:      Values{map[string]int{"a": 1}},
+			values:      NewValues(map[string]int{"a": 1}),
 			expected:    big.NewFloat(24833),
 		},
 	}

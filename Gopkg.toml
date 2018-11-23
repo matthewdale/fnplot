@@ -31,15 +31,15 @@
 
 [[constraint]]
   name = "github.com/leanovate/gopter"
-  version = "0.2.2"
+  version = ">=0.2.2"
 
 [[constraint]]
   name = "github.com/pkg/errors"
-  version = "0.8.0"
+  version = ">=0.8.0"
 
 [[constraint]]
   name = "github.com/stretchr/testify"
-  version = "1.2.2"
+  version = ">=1.2.2"
 
 [[constraint]]
   branch = "master"

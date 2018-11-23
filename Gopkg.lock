@@ -11,11 +11,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:cd931ea772312521f21e9369400f1f29ca72603903b6e0a1d09f82eb20c07b16"
+  digest = "1:8fda70c57919d8b3eda9806c43d26ad27efd6049571b838f6351d4c4b9dd5767"
   name = "github.com/ajstarks/svgo"
   packages = ["."]
   pruneopts = "UT"
-  revision = "7338bd80e7908a1cdc427fd4d222f883b254f771"
+  revision = "6ce6a3bcf6cde6c5007887677ebd148ec30f42a4"
 
 [[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
@@ -46,15 +46,15 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:3fe5284c459fea9a7eb4ee14ea81662e2b25eb030a8315e9d4ec978059101b10"
+  digest = "1:449a4110a85f1a1c67e3d5437d73bd02c6df09aff569676b5c88592bd0a31a38"
   name = "github.com/leanovate/gopter"
   packages = [
     ".",
-    "prop",
+    "gen",
   ]
   pruneopts = "UT"
-  revision = "1f4d0ba27bd5df5390eb622bcb458f8f7ac2573c"
-  version = "v0.2.2"
+  revision = "55d63c2a7cf19619ab64a7248c958afdc38e96a3"
+  version = "v0.2.3"
 
 [[projects]]
   branch = "master"
@@ -101,11 +101,11 @@
   name = "golang.org/x/exp"
   packages = ["rand"]
   pruneopts = "UT"
-  revision = "e88728d35e99800368f4acc0969018db6b0d3dd5"
+  revision = "a3060d491354240eda536d676ced8bb702018b7e"
 
 [[projects]]
   branch = "master"
-  digest = "1:6d809b59461cb45fc16f6aad67a3d81066e5f9098abf8b13eb4c49a03a6e2ef9"
+  digest = "1:7813ed9fe0d41dbe34f220634c84910ebd621e61a0bd5afaefc57dc1dc3c6a4c"
   name = "golang.org/x/image"
   packages = [
     "draw",
@@ -116,11 +116,11 @@
     "tiff/lzw",
   ]
   pruneopts = "UT"
-  revision = "c73c2afc3b812cdd6385de5a50616511c4a3d458"
+  revision = "249dc8530c0efc2766606a940c1c50b434b2f1cd"
 
 [[projects]]
   branch = "master"
-  digest = "1:fe3be90b72e3d862e4b1cc36669adf162db0004d7008793dbf7bf1538e88eb82"
+  digest = "1:e80a6fd3fdf0b0d2b31f98ca48d276b4ad9c90204cdfbe18986b52cf934ec1bf"
   name = "gonum.org/v1/gonum"
   packages = [
     "blas",
@@ -137,11 +137,11 @@
     "mat",
   ]
   pruneopts = "UT"
-  revision = "a809dafcb141e2414a6cf04a680ff84e72d45c69"
+  revision = "48288cca5b5efb2c3c3b0d8b48a6b01b37831bf8"
 
 [[projects]]
   branch = "master"
-  digest = "1:67780051ad1fe4c6f3f8588cd76d19fda92c35e84425845293ba94459594c970"
+  digest = "1:22d588671e307cca165877a978c3f8fc76f22a9940b1978ffdc4a20fbfc32c7b"
   name = "gonum.org/v1/plot"
   packages = [
     ".",
@@ -158,7 +158,7 @@
     "vg/vgsvg",
   ]
   pruneopts = "UT"
-  revision = "5f3c436ce602d80b13f2936b6bf149515198d6a4"
+  revision = "0582252c54f67a656af44d054ca37602364139eb"
 
 [solve-meta]
   analyzer-name = "dep"
@@ -166,7 +166,7 @@
   input-imports = [
     "github.com/ALTree/bigfloat",
     "github.com/leanovate/gopter",
-    "github.com/leanovate/gopter/prop",
+    "github.com/leanovate/gopter/gen",
     "github.com/pkg/errors",
     "github.com/stretchr/testify/assert",
     "github.com/stretchr/testify/require",
