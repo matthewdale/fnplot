@@ -26,11 +26,18 @@
   version = "v1.1.1"
 
 [[projects]]
+  digest = "1:b6e21e98fcbc23345ea2e3b70766edfc7fb53c0c99966fed18e889de0fcb67f2"
+  name = "github.com/fogleman/gg"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "0403632d5b905943a1c2a5b2763aaecd568467ec"
+  version = "v1.3.0"
+
+[[projects]]
   branch = "master"
-  digest = "1:7a6377256f670508711c56c25556d639e673c0fa0f519c5a758fdcbfc8af9ac8"
+  digest = "1:62c57507df491b657e9ae2645f30958d9964c8eeb380600469eedc951ebb3a0e"
   name = "github.com/golang/freetype"
   packages = [
-    ".",
     "raster",
     "truetype",
   ]
@@ -38,43 +45,31 @@
   revision = "e2365dfdc4a05e4b8299a783240d4a7d5a65d4e4"
 
 [[projects]]
-  digest = "1:db23aee6f0ff15fbcd0559d660f91d6b738baeeca46d953396b2fdcec93e1260"
+  digest = "1:b9c3c528e8239644674b839d8a48c01c823397a489dc87d8acf559d9f7f98ac1"
   name = "github.com/jung-kurt/gofpdf"
   packages = ["."]
   pruneopts = "UT"
-  revision = "14c1db30737a138f8d9797cffea58783892b2fae"
-  version = "v1.0.0"
+  revision = "1732f2ce35393f063815fec79ef3d752a20f26d8"
+  version = "v2.8.1"
 
 [[projects]]
-  digest = "1:449a4110a85f1a1c67e3d5437d73bd02c6df09aff569676b5c88592bd0a31a38"
+  digest = "1:75ee54777237987b02985d31530dc575f091b5aaab207dcf109e31cdc183b5bd"
   name = "github.com/leanovate/gopter"
   packages = [
     ".",
     "gen",
   ]
   pruneopts = "UT"
-  revision = "55d63c2a7cf19619ab64a7248c958afdc38e96a3"
-  version = "v0.2.3"
+  revision = "c8df375e1ea5a53748eb0dff007e9cc5e07b7cd3"
+  version = "v0.2.4"
 
 [[projects]]
-  branch = "master"
-  digest = "1:79d2dd4ecf0c5b24e0a372768fd523242098338ab4453b3422bfe6ef15627b88"
-  name = "github.com/llgcode/draw2d"
-  packages = [
-    ".",
-    "draw2dbase",
-    "draw2dimg",
-  ]
-  pruneopts = "UT"
-  revision = "f52c8a71aff06ab8df41843d33ab167b36c971cd"
-
-[[projects]]
-  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
+  digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
   name = "github.com/pkg/errors"
   packages = ["."]
   pruneopts = "UT"
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
 
 [[projects]]
   digest = "1:0028cb19b2e4c3112225cd871870f2d9cf49b9b4276531f03438a88e94be86fe"
@@ -85,51 +80,57 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:c40d65817cdd41fac9aa7af8bed56927bb2d6d47e4fea566a74880f5c2b1c41e"
+  digest = "1:5da8ce674952566deae4dbc23d07c85caafc6cfa815b0b3e03e41979cedb8750"
   name = "github.com/stretchr/testify"
   packages = [
     "assert",
     "require",
   ]
   pruneopts = "UT"
-  revision = "f35b8ab0b5a2cef36673838d662e249dd9c94686"
-  version = "v1.2.2"
+  revision = "ffdc059bfe9ce6a4e144ba849dbedead332c6053"
+  version = "v1.3.0"
 
 [[projects]]
   branch = "master"
-  digest = "1:47bcbdf2a60a0bdd142f07f60771078857310fd1ededeb03956add7c7f6bef33"
+  digest = "1:d87af402fc3f371d6b008f58903e98bee8873db45263dc54762f00735c582495"
   name = "golang.org/x/exp"
   packages = ["rand"]
   pruneopts = "UT"
-  revision = "a3060d491354240eda536d676ced8bb702018b7e"
+  revision = "fd42eb6b336fd763bcd0fb5be27323f5587d63d2"
 
 [[projects]]
   branch = "master"
-  digest = "1:7813ed9fe0d41dbe34f220634c84910ebd621e61a0bd5afaefc57dc1dc3c6a4c"
+  digest = "1:c70d11d47044f97775ad0533ad3a3b5665924acc4e3c95c87d3f1d33a954ca00"
   name = "golang.org/x/image"
   packages = [
+    "ccitt",
     "draw",
     "font",
+    "font/basicfont",
+    "font/plan9font",
     "math/f64",
     "math/fixed",
     "tiff",
     "tiff/lzw",
   ]
   pruneopts = "UT"
-  revision = "249dc8530c0efc2766606a940c1c50b434b2f1cd"
+  revision = "7e034cad644213bc79b336b52fce73624259aeca"
 
 [[projects]]
   branch = "master"
-  digest = "1:e80a6fd3fdf0b0d2b31f98ca48d276b4ad9c90204cdfbe18986b52cf934ec1bf"
+  digest = "1:c6acac1fabae458a6829b9a3163ebbde55f8877614b5a6f14a4ddc6f19dce7f7"
   name = "gonum.org/v1/gonum"
   packages = [
     "blas",
     "blas/blas64",
+    "blas/cblas128",
     "blas/gonum",
     "floats",
     "internal/asm/c128",
+    "internal/asm/c64",
     "internal/asm/f32",
     "internal/asm/f64",
+    "internal/cmplx64",
     "internal/math32",
     "lapack",
     "lapack/gonum",
@@ -137,11 +138,11 @@
     "mat",
   ]
   pruneopts = "UT"
-  revision = "48288cca5b5efb2c3c3b0d8b48a6b01b37831bf8"
+  revision = "536a303fd62fe10303f5c75bf644af9f54e90c25"
 
 [[projects]]
   branch = "master"
-  digest = "1:22d588671e307cca165877a978c3f8fc76f22a9940b1978ffdc4a20fbfc32c7b"
+  digest = "1:cb57d653efe00be3bdbeee946be51755a0dd6b73cbdacf0467733908b6e3c386"
   name = "gonum.org/v1/plot"
   packages = [
     ".",
@@ -158,7 +159,7 @@
     "vg/vgsvg",
   ]
   pruneopts = "UT"
-  revision = "0582252c54f67a656af44d054ca37602364139eb"
+  revision = "9aa86143727f898329b04f9a16882237caa96ddc"
 
 [solve-meta]
   analyzer-name = "dep"
