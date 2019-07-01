@@ -3,7 +3,6 @@ package fnplot
 import (
 	"fmt"
 	"log"
-	"math"
 	"math/big"
 	"math/rand"
 	"reflect"
@@ -19,7 +18,7 @@ import (
 	"gonum.org/v1/plot/vg"
 )
 
-type GeneratorResult interface {
+type generatorResult interface {
 	RetrieveAsValue() (reflect.Value, bool)
 }
 
@@ -72,12 +71,12 @@ func (set *ValuesSet) insert(input, output Values) error {
 	return nil
 }
 
-func (set *ValuesSet) PointsOn(x, y Axis) (plotter.XYs, error) {
+func (set *ValuesSet) PointsOn(xAxis, yAxis Axis) (plotter.XYs, error) {
 	set.mu.RLock()
 	defer set.mu.RUnlock()
 
-	x.SetMaxValue(set.maxInput)
-	y.SetMaxValue(set.maxOutput)
+	xAxis.SetMaxValue(set.maxInput)
+	yAxis.SetMaxValue(set.maxOutput)
 
 	points := make(plotter.XYs, len(set.pairs))
 	for i := range set.pairs {
@@ -85,28 +84,20 @@ func (set *ValuesSet) PointsOn(x, y Axis) (plotter.XYs, error) {
 		if err != nil {
 			return nil, errors.WithMessage(err, fmt.Sprintf("error converting input %d to int", i))
 		}
-		points[i].X = x.Point(inputScalar)
+		points[i].X = xAxis.Point(inputScalar)
 
 		outputScalar, err := set.pairs[i].output.Scalar()
 		if err != nil {
 			return nil, errors.WithMessage(err, fmt.Sprintf("error converting output %d to int", i))
 		}
-		points[i].Y = y.Point(outputScalar)
-
-		if pt := points[i]; math.IsInf(pt.X, 0) || math.IsInf(pt.Y, 0) {
-			log.Printf(
-				"Infinity found at value %d. Input: %s, output: %s, scaled X: %f, scaled Y: %f",
-				i,
-				inputScalar.String(),
-				outputScalar.String(),
-				pt.X,
-				pt.Y)
-		}
+		points[i].Y = yAxis.Point(outputScalar)
 	}
 	sort.Sort(sortablePoints(points))
 	return points, nil
 }
 
+// A Fn is a plottable function that holds the function to plot, the input
+// generators, and the inputs and outputs as scalars.
 type Fn struct {
 	p   gopter.Prop
 	set *ValuesSet
@@ -166,7 +157,7 @@ func forAllGens(vs *ValuesSet, fn interface{}, gens ...gopter.Gen) gopter.Prop {
 	})
 }
 
-func NewFn(fn interface{}, gens ...Generator) Fn {
+func NewFn(fn interface{}, samples int, gens ...Generator) Fn {
 	gopterGens := make([]gopter.Gen, len(gens))
 	for i := range gens {
 		gopterGens[i] = gopter.Gen(gens[i])
@@ -174,13 +165,16 @@ func NewFn(fn interface{}, gens ...Generator) Fn {
 	vs := &ValuesSet{
 		pairs: make([]ioPair, 10),
 	}
-	return Fn{
+	f := Fn{
 		p:   forAllGens(vs, fn, gopterGens...),
 		set: vs,
 	}
+	f.run(samples)
+	return f
 }
 
-func (fn Fn) Run(samples int) error {
+// run runs the function with the set of input generators.
+func (fn Fn) run(samples int) error {
 	res := fn.p.Check(&gopter.TestParameters{
 		MinSuccessfulTests: samples,
 		MaxSize:            samples,
@@ -201,36 +195,35 @@ func (fn Fn) ValuesSet() *ValuesSet {
 	return fn.set
 }
 
-type FnPlot struct {
-	Title    string
-	Filename string
-	Fn       Fn
-	Samples  int
-	X, Y     Axis
+type Plot struct {
+	Title string
+	Fn    Fn
+	X, Y  Axis
 }
 
-func (fp FnPlot) Save() error {
-	if err := fp.Fn.Run(fp.Samples); err != nil {
-		return errors.WithMessage(err, "error running function")
-	}
+// Save writes the plot as an image to the given filename. The image format is
+// determined by the file extension.
+func (pl Plot) Save(filename string) error {
 	p, err := plot.New()
 	if err != nil {
 		return errors.WithMessage(err, "error creating plot")
 	}
-	p.Title.Text = fp.Title
+	p.Title.Text = pl.Title
 	p.X.Label.Text = " "
 	p.Y.Label.Text = " "
 
-	points, err := fp.Fn.ValuesSet().PointsOn(fp.X, fp.Y)
+	points, err := pl.Fn.ValuesSet().PointsOn(pl.X, pl.Y)
 	if err != nil {
 		log.Fatalf("Error generating X,Y points: %s", err)
 	}
 	err = plotutil.AddLinePoints(p, "Fn", points)
-	if err != nil {
-		panic(err)
+	if err == plotter.ErrInfinity {
+		return errors.New("infinity value found, consider using an axis that supports scaling")
+	} else if err != nil {
+		return err
 	}
 
 	// Save the plot to a file. The format is determined by the file extension.
-	err = p.Save(20*vg.Inch, 4*vg.Inch, fp.Filename)
+	err = p.Save(20*vg.Inch, 4*vg.Inch, filename)
 	return errors.WithMessage(err, "error writing plot image")
 }

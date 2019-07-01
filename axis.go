@@ -1,7 +1,6 @@
 package fnplot
 
 import (
-	"log"
 	"math/big"
 
 	"github.com/ALTree/bigfloat"
@@ -33,7 +32,6 @@ func (sa ScaledAxis) Point(p *big.Float) float64 {
 
 func (sa *ScaledAxis) SetMaxValue(v *big.Float) {
 	sa.ratio = big.NewFloat(0).Quo(big.NewFloat(sa.Max), v)
-	log.Printf("Scaling ratio: %s", sa.ratio.String())
 }
 
 type LnAxis struct{}
@@ -63,5 +61,4 @@ func (lsa LnScaledAxis) Point(p *big.Float) float64 {
 
 func (lsa *LnScaledAxis) SetMaxValue(v *big.Float) {
 	lsa.ratio = big.NewFloat(0).Quo(big.NewFloat(lsa.Max), bigfloat.Log(v))
-	// log.Printf("Ln scaling ratio: %s", lsa.ratio.String())
 }

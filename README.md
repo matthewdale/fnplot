@@ -15,16 +15,15 @@ import (
 
 func main() {
     err := fnplot.FnPlot{
-        Fn: fnplot.NewFn(
-            math.Sin,
-            fnplot.Float64Range(0, 100),
-        ),
-        Filename: "sin.png",
-        Title:    "math.Sin",
-        Samples:  2000,
-        X:        &fnplot.StdAxix{},
-        Y:        &fnplot.StdAxix{},
-    }.Save()
+		Fn: fnplot.NewFn(
+			math.Sin,
+			2000,
+			fnplot.Float64Range(0, 100),
+		),
+		Title: "math.Sin",
+		X:     &fnplot.StdAxix{},
+		Y:     &fnplot.StdAxix{},
+	}.Save("sin.png")
 
     if err != nil {
         panic(err)
@@ -32,7 +31,8 @@ func main() {
 }
 ```
 
-### Binary Functions
+
+### Byte Functions
 Plot the `md5.Sum` function using a natural log X axis and scaled Y axis.
 
 ```go
@@ -43,17 +43,16 @@ import (
 
 func main() {
     err := fnplot.FnPlot{
-        Fn: fnplot.NewFn(
-            func(s string) [md5.Size]byte {
-                return md5.Sum([]byte(s))
-            },
-            fnplot.AnyString()),
-        Filename: "md5.png",
-        Title:    "md5.Sum",
-        Samples:  2000,
-        X:        &fnplot.LnAxis{},
-        Y:        &fnplot.ScaledAxis{Max: 1000},
-    }.Save()
+		Fn: fnplot.NewFn(
+			func(s string) [md5.Size]byte {
+				return md5.Sum([]byte(s))
+			},
+			2000,
+			fnplot.AnyString()),
+		Title: "md5.Sum",
+		X:     &fnplot.LnAxis{},
+		Y:     &fnplot.ScaledAxis{Max: 1000},
+	}.Save("md5.png")
 
     if err != nil {
         panic(err)
